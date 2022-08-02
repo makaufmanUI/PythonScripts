@@ -8,6 +8,7 @@
 
 import json
 from pathlib import Path
+from secrets import choice
 from matplotlib import pyplot
 from urllib.request import urlopen
 
@@ -29,6 +30,28 @@ def raiseException(e, line, file=None):
         print(f"\n>>>  Exception at line {line} in {file}:")
         for i in range(len(str(line))+len(file)+28): print('-',end='')
         print(f"\n{e}")
+
+
+
+
+#*************************************************************#
+#                                                             #
+#   Given a raw discord message,                              #
+#   extracts the list of games within,                        #
+#   and chooses one of them at random.                        #
+#     Input:  raw discord message beginning with ".",         #
+#             and containing the word "game" within it:       #
+#             ".game", ".pickgame", ".choosegame", etc.       #
+#     Output: a randomly chosen game from the list provided   #
+#                                                             #
+#   Example message: .pickgame halo, phasmo, bif, rocket      #
+#                                                             #
+#*************************************************************#
+def PickRandomGame(message):
+    list_ = message.split('game')[1].strip().rstrip().split(',')   # rough-form of games list
+    games = [game.strip() for game in list_]                       # whitespace-stripped games list
+    if len(games[-1]) < 2: games.pop()                             # removes last item if it's only 1 char
+    return choice(games)
 
 
 
