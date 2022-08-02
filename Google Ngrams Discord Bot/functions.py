@@ -93,7 +93,7 @@ def get(query):
     with urlopen(url) as response:
         datajson = json.loads(response.read())[0]                      # read the json data
     try:  timeseries = datajson['timeseries']                          # extract the timeseries
-    except Exception as e:  raiseException(e,74,__file__)
+    except Exception as e:  raiseException(e,96,__file__)
     norm, smallest_year, biggest_year = normalize(timeseries, start)   # normalize the timeseries
     return norm, smallest_year, biggest_year, search, start, end
 
@@ -123,28 +123,28 @@ def getURL(query, start=1800, end=2019, smoothing=0, **kwargs):
             if 'start' in split_str[i]:
                 if '=' in split_str[i]:                                           # if the start year is specified with '='
                     try:  start = int(split_str[i].split('=')[1])                   # get start year as an int
-                    except Exception as e:  raiseException(e,103,__file__)
+                    except Exception as e:  raiseException(e,126,__file__)
                 elif 'at' in split_str[i]:                                        # if the start year is specified with 'at'
                     try:  start = int(split_str[i].split('at')[1])                  # get start year as an int
-                    except Exception as e:  raiseException(e,106,__file__)
+                    except Exception as e:  raiseException(e,129,__file__)
                 elif 'from' in split_str[i]:                                      # if the start year is specified with 'at'
                     try:  start = int(split_str[i].split('from')[1])                # get start year as an int
-                    except Exception as e:  raiseException(e,109,__file__)
+                    except Exception as e:  raiseException(e,132,__file__)
 
             if 'end' in split_str[i]:
                 if '=' in split_str[i]:                                           # if the end year is specified with '='
                     try:  end = int(split_str[i].split('=')[1])                     # get end year as an int
-                    except Exception as e:  raiseException(e,114,__file__)
+                    except Exception as e:  raiseException(e,137,__file__)
                 elif 'at' in split_str[i]:                                        # if the end year is specified with 'at'
                     try:  end = int(split_str[i].split('at')[1])                    # get end year as an int
-                    except Exception as e:  raiseException(e,117,__file__)
+                    except Exception as e:  raiseException(e,140,__file__)
                 elif 'from' in split_str[i]:                                      # if the end year is specified with 'at'
                     try:  end = int(split_str[i].split('from')[1])                  # get end year as an int
-                    except Exception as e:  raiseException(e,120,__file__)
+                    except Exception as e:  raiseException(e,143,__file__)
 
             if 'smoothing' in split_str[i]:
                 try:  smoothing = int(split_str[i].split('=')[1])                 # get smoothing amount as an int
-                except Exception as e:  raiseException(e,124,__file__)
+                except Exception as e:  raiseException(e,147,__file__)
     
     else:
         search = query[1:]                                  # search string is everything after '.' in query string
