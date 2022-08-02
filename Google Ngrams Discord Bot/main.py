@@ -62,7 +62,7 @@ async def on_message(message):
             query = message.content
             print(f"\n>>>  {message.author.name} sent:  '{query}'", end='')
             try:  plot(query)
-            except Exception as e:  raiseException(e,61,__file__)
+            except Exception as e:  raiseException(e,65,__file__)
             await message.channel.send(file=discord.File('pic.png'))
             print(f"\t--> Completed query in {round(time.perf_counter()-start,3)} seconds\n")
     
