@@ -9,7 +9,7 @@
 import time
 import discord
 from datetime import datetime as dt
-from functions import plot, raiseException
+from functions import plot, raiseException, PickRandomGame
 
 TOKEN = 'xxxxx'
 
@@ -52,12 +52,19 @@ async def on_message(message):
     #                            #
     #****************************#
     if message.content.startswith('.'):
-        query = message.content
-        print(f"\n>>>  {message.author.name} sent:  '{query}'", end='')
-        try:  plot(query)
-        except Exception as e:  raiseException(e,61,__file__)
-        await message.channel.send(file=discord.File('pic.png'))
-        print(f"\t--> Completed query in {round(time.perf_counter()-start,3)} seconds\n")
+        if "game" in message.content:
+            try:
+                game = PickRandomGame(message.content)
+                await message.channel.send(f"You shall play {game}.")
+            except:
+                await message.channel.send("IDK. Pick one yourself.")
+        else:
+            query = message.content
+            print(f"\n>>>  {message.author.name} sent:  '{query}'", end='')
+            try:  plot(query)
+            except Exception as e:  raiseException(e,61,__file__)
+            await message.channel.send(file=discord.File('pic.png'))
+            print(f"\t--> Completed query in {round(time.perf_counter()-start,3)} seconds\n")
     
 
 
